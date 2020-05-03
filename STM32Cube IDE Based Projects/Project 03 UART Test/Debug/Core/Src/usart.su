@@ -1,0 +1,2 @@
+usart.c:5:6:USART_transmit	24	static
+usart.c:12:6:USART_receive	24	static
