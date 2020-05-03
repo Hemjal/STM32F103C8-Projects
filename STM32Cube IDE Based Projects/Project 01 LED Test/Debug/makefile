@@ -40,8 +40,8 @@ Project\ 01\ LED\ Test.bin \
 all: Project\ 01\ LED\ Test.elf secondary-outputs
 
 # Tool invocations
-Project\ 01\ LED\ Test.elf: $(OBJS) $(USER_OBJS) D:\Hobby\ projects\STM32F103C8-Projects\STM32Cube\ IDE\ Based\ Projects\STM32F103C8TX_FLASH.ld
-	arm-none-eabi-gcc -o "Project 01 LED Test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Hobby projects\STM32F103C8-Projects\STM32Cube IDE Based Projects\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project 01 LED Test.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Project\ 01\ LED\ Test.elf: $(OBJS) $(USER_OBJS) D:\Hobby\ projects\STM32F103C8-Projects\STM32Cube\ IDE\ Based\ Projects\Project\ 01\ LED\ Test\STM32F103C8TX_FLASH.ld
+	arm-none-eabi-gcc -o "Project 01 LED Test.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"D:\Hobby projects\STM32F103C8-Projects\STM32Cube IDE Based Projects\Project 01 LED Test\STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Project 01 LED Test.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
