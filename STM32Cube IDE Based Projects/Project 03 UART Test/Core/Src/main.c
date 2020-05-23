@@ -1,18 +1,14 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
+  * file           : main.c
+  * brief          : Main program body
   ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
-  * All rights reserved.</center></h2>
-  *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * Created by Hemjal Md Abu
+  * Program Objective : Testing USART functionality.
+  * Status: Working successfully.
+  * website: www.hemjal.dev
+  * Email: abu@hemjal.dev , abuhemjalharun@yahoo.com
   *
   ******************************************************************************
   */
@@ -22,103 +18,44 @@
 #include "main.h"
 
 
-/* Private includes ----------------------------------------------------------*/
-/* USER CODE BEGIN Includes */
-
-/* USER CODE END Includes */
-
-/* Private typedef -----------------------------------------------------------*/
-/* USER CODE BEGIN PTD */
-
-/* USER CODE END PTD */
-
-/* Private define ------------------------------------------------------------*/
-/* USER CODE BEGIN PD */
-/* USER CODE END PD */
-
-/* Private macro -------------------------------------------------------------*/
-/* USER CODE BEGIN PM */
-
-/* USER CODE END PM */
-
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart1;
-
-/* USER CODE BEGIN PV */
-
-/* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
-/* USER CODE BEGIN PFP */
 
-/* USER CODE END PFP */
-
-/* Private user code ---------------------------------------------------------*/
-/* USER CODE BEGIN 0 */
-void debugPrint(UART_HandleTypeDef *huart, char _out[]);
-void debugPrintln(UART_HandleTypeDef *huart, char _out[]);
-
-
-/* USER CODE END 0 */
-
-/**
-  * @brief  The application entry point.
-  * @retval int
-  */
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
 
-  /* USER CODE END 1 */
-
-  /* MCU Configuration--------------------------------------------------------*/
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
 
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
   /* Configure the system clock */
   SystemClock_Config();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_USART1_UART_Init();
-  /* USER CODE BEGIN 2 */
 
-  /* USER CODE END 2 */
-
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
   while (1)
   {
 	  for(;;)
 	  {
-/*
-		  debugPrint(&huart1, "oi, mate!");
-	      debugPrint(&huart1, "\r\n");            // manual new line
-	      debugPrintln(&huart1, "how are you?");  // print full line     osDelay(1000);   }
-*/
 	      USART_transmit(&huart1, "My name is khan");
 		  HAL_Delay(3000);
+		  USART_transmit(&huart1, "Enter your data");
+		  char received_data[20]= {'\0'};
+		  USART_receive(&huart1, received_data, 20);
+		  USART_transmit(&huart1, "Received data is");
+		  USART_transmit(&huart1, received_data);
 	  }
   }
-  /* USER CODE END 3 */
 }
 
-/**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
@@ -157,13 +94,6 @@ void SystemClock_Config(void)
 static void MX_USART1_UART_Init(void)
 {
 
-  /* USER CODE BEGIN USART1_Init 0 */
-
-  /* USER CODE END USART1_Init 0 */
-
-  /* USER CODE BEGIN USART1_Init 1 */
-
-  /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
   huart1.Init.BaudRate = 9600;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
@@ -195,20 +125,6 @@ static void MX_GPIO_Init(void)
 
 }
 
-void debugPrint(UART_HandleTypeDef *huart, char _out[])
-
-{
-	HAL_UART_Transmit(huart, (uint8_t *) _out, strlen(_out), 10);
-}
-
-void debugPrintln(UART_HandleTypeDef *huart, char _out[])
-{
-	HAL_UART_Transmit(huart, (uint8_t *) _out, strlen(_out), 10);
-	char newline[2] = "\r\n";
-	HAL_UART_Transmit(huart, (uint8_t *) newline, 2, 10);
-}
-
-
 
 /**
   * @brief  This function is executed in case of error occurrence.
@@ -239,4 +155,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
