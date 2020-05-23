@@ -8,6 +8,7 @@ projects based on STM32F103C8 Blue pill structured as follows-
   1. Project 01 LED Test
   2. Project 02 GPIO Test
   3. Project 03 UART Test
+  4. Project 04 I2C Test
 
 
 
